@@ -1973,7 +1973,8 @@ static int iwpriv_get_assoc_list(struct net_device *dev,
 	p_mac_str_end = &mac_lst[sizeof(mac_lst)-1];
 
 	for (i = 0; i < 8; i++) {
-		struct ether_addr *id = &sta_maclist->ea[i];
+//		struct ether_addr *id = &sta_maclist->ea[i];
+		struct ether_addr * id = sta_maclist[i].ea;
 		if (!ETHER_ISNULLADDR(id->octet)) {
 			scb_val_t scb_val;
 			int rssi = 0;
@@ -5145,7 +5146,8 @@ wl_iw_set_pmksa(
 
 		if ((pmkid_list.pmkids.npmkid > 0) && (i < pmkid_list.pmkids.npmkid)) {
 			bzero(&pmkid_list.pmkids.pmkid[i], sizeof(pmkid_t));
-			for (; i < (pmkid_list.pmkids.npmkid - 1); i++) {
+//			build fix hounjini.
+/*			for (; i < (pmkid_list.pmkids.npmkid - 1); i++) {
 				bcopy(&pmkid_list.pmkids.pmkid[i+1].BSSID,
 					&pmkid_list.pmkids.pmkid[i].BSSID,
 					ETHER_ADDR_LEN);
@@ -5153,6 +5155,28 @@ wl_iw_set_pmksa(
 					&pmkid_list.pmkids.pmkid[i].PMKID,
 					WPA2_PMKID_LEN);
 			}
+*/
+			for (; i < (pmkid_list.pmkids.npmkid - 1); i++) {
+				if (i == 0)
+				{
+					bcopy(&pmkid_list.foo[0].BSSID,
+						&pmkid_list.pmkids.pmkid[i].BSSID,
+						ETHER_ADDR_LEN);
+					bcopy(&pmkid_list.foo[0].PMKID,
+						&pmkid_list.pmkids.pmkid[i].PMKID,
+						WPA2_PMKID_LEN);
+				}
+				else
+				{
+					bcopy(&pmkid_list.foo[i+1].BSSID,
+						&pmkid_list.foo[i].BSSID,
+						ETHER_ADDR_LEN);
+					bcopy(&pmkid_list.foo[i+1].PMKID,
+ 						&pmkid_list.foo[i].PMKID,
+					WPA2_PMKID_LEN);
+				}
+			}
+
 			pmkid_list.pmkids.npmkid--;
 		}
 		else
