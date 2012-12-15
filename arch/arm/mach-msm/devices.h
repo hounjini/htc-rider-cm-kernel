@@ -87,7 +87,6 @@ extern struct platform_device msm_device_gadget_peripheral;
 extern struct platform_device msm_device_hsusb_host;
 extern struct platform_device msm_device_hsusb_host2;
 extern struct platform_device msm_device_hsic_host;
-extern struct platform_device msm_device_hsusb;
 
 extern struct platform_device msm_device_otg;
 
@@ -134,6 +133,10 @@ extern struct platform_device msm_device_nand;
 extern struct platform_device msm_device_tssc;
 
 extern struct platform_device msm_rotator_device;
+
+#ifdef CONFIG_MSM_BUS_SCALING
+extern struct msm_bus_scale_pdata rotator_bus_scale_pdata;
+#endif
 
 extern struct platform_device msm_device_tsif[2];
 
@@ -228,4 +231,6 @@ extern struct platform_device msm_tpiu_device;
 extern struct platform_device msm_funnel_device;
 extern struct platform_device msm_debug_device;
 extern struct platform_device msm_ptm_device;
+
+extern struct platform_device ion_dev;
 #endif

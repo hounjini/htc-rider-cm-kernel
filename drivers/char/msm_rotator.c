@@ -1377,12 +1377,17 @@ msm_rotator_close(struct inode *inode, struct file *filp)
 static long msm_rotator_ioctl(struct file *file, unsigned cmd,
 						 unsigned long arg)
 {
+//int result = ioctl(mRotFD, MSM_ROTATOR_IOCTL_START, &mRotInfo);
+
 	struct msm_rotator_fd_info *fd_info;
 
 	if (_IOC_TYPE(cmd) != MSM_ROTATOR_IOCTL_MAGIC)
 		return -ENOTTY;
 
 	fd_info = (struct msm_rotator_fd_info *)file->private_data;
+
+/* hounjini added */
+	printk(KERN_ALERT "hounjini >> IOCTL COMMAND IS : %u", cmd);
 
 	switch (cmd) {
 	case MSM_ROTATOR_IOCTL_START:
