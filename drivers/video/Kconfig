@@ -2383,11 +2383,7 @@ config FB_PUV3_UNIGFX
 	  framebuffer device. Without the support of PCI & AGP.
 
 if ARCH_MSM8X60
-	source "drivers/video/msm_8x60/Kconfig"
-endif
-
-if ARCH_MSM7X30
-	source "drivers/video/msm_7x30/Kconfig"
+	source "drivers/video/msm/Kconfig"
 endif
 
 if (ARCH_MSM8960 || ARCH_MSM7X27A || ARCH_MSM8X60)
@@ -2398,9 +2394,7 @@ config FB_MSM_OVERLAY_LEGACY
 	bool
 	prompt "A small hack for ioctl backward compatible before ICS"
 	depends on FB_MSM_OVERLAY
-	default n if ARCH_MSM8960
 	default n if ARCH_MSM8X60
-	default n if ARCH_MSM7X30
 
 
 source "drivers/video/omap/Kconfig"

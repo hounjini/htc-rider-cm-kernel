@@ -38,7 +38,7 @@
 #include "../devices.h"
 #include "../board-rider.h"
 #include "../devices-msm8x60.h"
-#include "../../../../drivers/video/msm_8x60/mdp_hw.h"
+#include "../../../../drivers/video/msm/mdp_hw.h"
 
 /*
 TODO:

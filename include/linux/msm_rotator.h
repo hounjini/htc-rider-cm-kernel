@@ -4,7 +4,7 @@
 #include <linux/types.h>
 #include <linux/msm_mdp.h>
 
-#define MSM_ROTATOR_IOCTL_MAGIC 'Q'
+#define MSM_ROTATOR_IOCTL_MAGIC 'R'
 
 #define MSM_ROTATOR_IOCTL_START   \
 		_IOWR(MSM_ROTATOR_IOCTL_MAGIC, 1, struct msm_rotator_img_info)
@@ -31,6 +31,7 @@ struct msm_rotator_img_info {
 	unsigned char   rotations;
 	int enable;
 	unsigned int	downscale_ratio;
+	unsigned int secure;
 };
 
 struct msm_rotator_data_info {
