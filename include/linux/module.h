@@ -21,6 +21,7 @@
 #include <asm/module.h>
 
 #include <trace/events/module.h>
+#include <linux/export.h>
 
 /* Not Yet Implemented */
 #define MODULE_SUPPORTED_DEVICE(name)
@@ -33,13 +34,13 @@
 #endif
 
 #define MODULE_NAME_LEN MAX_PARAM_PREFIX_LEN
-
+/*
 struct kernel_symbol
 {
 	unsigned long value;
 	const char *name;
 };
-
+*/
 struct modversion_info
 {
 	unsigned long crc;
