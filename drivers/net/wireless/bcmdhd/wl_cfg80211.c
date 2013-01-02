@@ -2627,6 +2627,7 @@ static s32 wl_cfg80211_get_tx_power(struct wiphy *wiphy, s32 *dbm)
 {
 	struct wl_priv *wl = wiphy_priv(wiphy);
 	struct net_device *ndev = wl_to_prmry_ndev(wl);
+
 	s32 txpwrdbm;
 	u8 result;
 	s32 err = 0;
@@ -3055,6 +3056,8 @@ wl_cfg80211_set_power_mgmt(struct wiphy *wiphy, struct net_device *dev,
 	s32 pm;
 	s32 err = 0;
 	struct wl_priv *wl = wiphy_priv(wiphy);
+	/* import frm fanco kernel */
+	dhd_pub_t *dhd = (dhd_pub_t *)(wl->pub);
 
 	CHECK_SYS_UP(wl);
 
@@ -3062,8 +3065,8 @@ wl_cfg80211_set_power_mgmt(struct wiphy *wiphy, struct net_device *dev,
 	if (wl->p2p_net == dev) {
 		return err;
 	}
-
-	pm = enabled ? PM_FAST : PM_OFF;
+//	pm = enabled ? PM_FAST : PM_OFF;
+	pm = enabled ? ((dhd->in_suspend) ? PM_MAX : PM_FAST) : PM_OFF;
 	pm = htod32(pm);
 	err = wldev_ioctl(dev, WLC_SET_PM, &pm, sizeof(pm), true);
 	if (unlikely(err)) {
